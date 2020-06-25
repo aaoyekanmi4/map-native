@@ -1,8 +1,21 @@
 import React from 'react';
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
+import stores from './MarkerData';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 
 export default class App extends React.Component {
+
+  generateMarkerData = () => {
+    return stores.features.map((place, index) => 
+      <Marker
+        key={index}
+        description={place.properties.Address}
+        title={place.properties.name}
+        coordinate={{ latitude: place.geometry.coordinates[1], longitude: place.geometry.coordinates[0] }}
+      />
+        
+    )
+   }
   render() {
     return (
       <View style={styles.container}>
@@ -14,7 +27,9 @@ export default class App extends React.Component {
             latitudeDelta: 0.50,
             longitudeDelta: 0.50,
           }}
-        />
+        >
+          {this.generateMarkerData(data)}
+        </MapView>
       </View>
     );
   }
