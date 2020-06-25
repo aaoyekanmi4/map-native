@@ -1,12 +1,23 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import MapView from 'react-native-maps';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
+export default class App extends React.Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <MapView
+          style={styles.mapStyle}
+          initialRegion={{
+            latitude: 38.909671,
+            longitude: -77.034084,
+            latitudeDelta: 0.50,
+            longitudeDelta: 0.50,
+          }}
+        />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -15,5 +26,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  mapStyle: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
   },
 });
